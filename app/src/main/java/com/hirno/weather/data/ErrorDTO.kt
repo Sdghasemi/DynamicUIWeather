@@ -8,9 +8,9 @@ import kotlinx.parcelize.Parcelize
  * Model of server-returned errors
  */
 @Parcelize
-data class ErrorResponseModel(
+data class ErrorDTO(
     @SerializedName("reason")
-    var reason: String? = null,
+    val reason: String? = null,
     @SerializedName("error")
-    var error: Boolean = false,
+    val error: Boolean = false,
 ) : Parcelable

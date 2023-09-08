@@ -36,10 +36,17 @@ sealed class WeatherState {
         private val _refreshStyle: UiOptionsDTO.RefreshStyle? = null,
     ) : WeatherState(), Parcelable {
         companion object {
-            fun from(error: Any, refreshStyle: UiOptionsDTO.RefreshStyle?) = when (error) {
-                is Int -> Error(resId = error, _refreshStyle = refreshStyle)
-                is String -> Error(text = error, _refreshStyle = refreshStyle)
-                else -> throw IllegalArgumentException("error message must be String or Int")
+            fun from(error: Any, previousState: WeatherState? = null): Error {
+                val refreshStyle = when (previousState) {
+                    is Success -> previousState.weather.ui.refreshStyle
+                    is Error -> previousState.refreshStyle
+                    else -> null
+                }
+                return when (error) {
+                    is Int -> Error(resId = error, _refreshStyle = refreshStyle)
+                    is String -> Error(text = error, _refreshStyle = refreshStyle)
+                    else -> throw IllegalArgumentException("error message must be String or Int")
+                }
             }
         }
 

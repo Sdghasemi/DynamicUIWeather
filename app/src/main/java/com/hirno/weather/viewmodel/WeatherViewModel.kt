@@ -26,7 +26,10 @@ class WeatherViewModel(
 
     fun event(event: WeatherEvent) {
         when(event) {
-            WeatherEvent.ScreenLoad -> if (viewState.value !is WeatherState.Success) loadWeatherForecast()
+            WeatherEvent.ScreenLoad -> {
+                if (viewState.value !is WeatherState.Success)
+                    loadWeatherForecast()
+            }
             WeatherEvent.Refresh -> loadWeatherForecast()
         }
     }
@@ -34,31 +37,24 @@ class WeatherViewModel(
     private fun loadWeatherForecast() {
         viewModelScope.launch {
             viewState.apply {
-                val prevRefreshStyle = getPreviousRefreshStyle()
+                val previousState = value
                 value = WeatherState.Loading
                 value = when (val result = repository.getForecast()) {
                     is NetworkResponse.Success -> WeatherState.Success(weather = result.body)
                     is NetworkResponse.ApiError -> WeatherState.Error.from(
                         error = result.body.reason ?: R.string.an_error_occurred,
-                        refreshStyle = prevRefreshStyle
+                        previousState = previousState
                     )
                     is NetworkResponse.NetworkError -> WeatherState.Error.from(
                         error = R.string.failed_to_connect_to_remote_server,
-                        refreshStyle = prevRefreshStyle
+                        previousState = previousState
                     )
                     is NetworkResponse.UnknownError -> WeatherState.Error.from(
                         error = R.string.an_error_occurred,
-                        refreshStyle = prevRefreshStyle
+                        previousState = previousState
                     )
                 }
             }
         }
     }
-
-    private fun MutableLiveData<WeatherState>.getPreviousRefreshStyle() =
-        when (val previousState = value) {
-            is WeatherState.Success -> previousState.weather.ui.refreshStyle
-            is WeatherState.Error -> previousState.refreshStyle
-            else -> null
-        }
 }
