@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="day_background_overlay">#CBFFFFFF</color>
+    <color name="night_background_overlay">#CD000000</color>
+
+    <color name="background_1_start">#6A1B9A</color>
+    <color name="background_2_start">#00A0DF</color>
+    <color name="background_3_start">#D35300</color>
+    <color name="background_4_start">#FFB800</color>
+    <color name="background_5_start">#4B46DF</color>
+    <color name="background_6_start">#00A0DF</color>
+    <color name="background_7_start">#0CA000</color>
+    <color name="background_8_start">#BF0D0E</color>
+    <color name="background_1_end">#AD1457</color>
+    <color name="background_2_end">#451B9A</color>
+    <color name="background_3_end">#A70028</color>
+    <color name="background_4_end">#F15A24</color>
+    <color name="background_5_end">#AC02FF</color>
+    <color name="background_6_end">#0C733C</color>
+    <color name="background_7_end">#C8B43C</color>
+    <color name="background_8_end">#5B0030</color>
+
+    <color name="primary_text_day">#000000</color>
+    <color name="primary_text_night">#FFFFFF</color>
+    <color name="secondary_text_day">#505050</color>
+    <color name="secondary_text_night">#A7A7A7</color>
+
+    <color name="high_temp_text">#FF0057</color>
+    <color name="low_temp_text">#008EFF</color>
+
+    <color name="sun_tint">#FFC107</color>
+    <color name="sunrise_tint">#FFEB3B</color>
+    <color name="sunset_tint">#FF8400</color>
+</resources>

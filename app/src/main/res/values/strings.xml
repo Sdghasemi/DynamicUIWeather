@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Weather App</string>
+    <string name="failed_to_connect_to_remote_server">Failed to connect to remote server!</string>
+    <string name="an_error_occurred">An error occurred!</string>
+    <string name="swipe_to_refresh_hint">\nPlease swipe to retry!</string>
+    <string name="fab_refresh_hint">\nPlease try again!</string>
+    <string name="temperature_degrees">%d°</string>
+    <string name="un_index">UV Index</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunset">Sunset</string>
+    <string name="high">High</string>
+    <string name="low">Low</string>
+</resources>
