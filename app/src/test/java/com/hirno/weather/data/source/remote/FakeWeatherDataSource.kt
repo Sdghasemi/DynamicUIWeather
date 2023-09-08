@@ -1,19 +1,24 @@
 package com.hirno.weather.data.source.remote
 
-import com.hirno.weather.data.ErrorResponseModel
-import com.hirno.weather.data.GenericResponse
+import com.hirno.weather.data.ErrorDTO
+import com.hirno.weather.data.blankForecast
 import com.hirno.weather.data.source.WeatherDataSource
-import com.hirno.weather.model.ForecastDTO
 import com.hirno.weather.network.response.NetworkResponse
 
 object FakeWeatherDataSource : WeatherDataSource {
-    var weather = ForecastDTO()
+    var weather = blankForecast
     var errorMessage: String? = null
+
+    fun reset() {
+        weather = blankForecast
+        errorMessage = null
+    }
+
     override suspend fun getForecast() = generateResponse()
 
     private fun generateResponse() = errorMessage?.let { message ->
         NetworkResponse.ApiError(
-            body = ErrorResponseModel(
+            body = ErrorDTO(
                 reason = message,
                 error = true,
             ),

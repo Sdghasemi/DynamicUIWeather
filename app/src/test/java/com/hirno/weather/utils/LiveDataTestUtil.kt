@@ -2,6 +2,7 @@ package com.hirno.weather.utils
 
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Observer
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
@@ -44,4 +45,13 @@ inline fun <T> LiveData<T>.getOrAwaitValue(
 
     @Suppress("UNCHECKED_CAST")
     return data as T
+}
+fun <X> LiveData<X>.skip(predicate: (X) -> Boolean): LiveData<X> {
+    val outputLiveData = MediatorLiveData<X>()
+    outputLiveData.addSource(this) { value ->
+        if (!predicate(value)) {
+            outputLiveData.value = value
+        }
+    }
+    return outputLiveData
 }
