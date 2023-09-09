@@ -21,8 +21,6 @@ import java.util.TimeZone
 
 /**
  * States of the [WeatherActivity] screen
- *
- * @constructor Create empty Weather state
  */
 sealed class WeatherState {
     @Parcelize

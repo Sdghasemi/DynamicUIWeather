@@ -8,6 +8,7 @@ import com.hirno.weather.data.blankForecast
 import com.hirno.weather.data.source.WeatherDataSource
 import com.hirno.weather.data.source.remote.FakeWeatherDataSource
 import com.hirno.weather.di.testAppModules
+import com.hirno.weather.model.UiOptionsDTO
 import com.hirno.weather.model.WeatherEvent
 import com.hirno.weather.model.WeatherState
 import com.hirno.weather.utils.MainDispatcherRule
@@ -170,6 +171,33 @@ class WeatherViewModelTest : KoinTest {
         assertEquals(
             expected = WeatherState.Success(blankForecast),
             actual = savedState["viewState"],
+        )
+    }
+
+    @Test
+    fun `test preserving previous refresh style on error after success`() {
+        FakeWeatherDataSource.weather = blankForecast.copy(
+            ui = UiOptionsDTO(
+                refreshStyle = UiOptionsDTO.RefreshStyle.FAB,
+            )
+        )
+
+        viewModel.event(WeatherEvent.ScreenLoad)
+
+        FakeWeatherDataSource.apply {
+            reset()
+            errorMessage = badRequest.message
+        }
+
+        viewModel.event(WeatherEvent.Refresh)
+
+        val response = viewModel.obtainState
+            .skip { it is WeatherState.Loading }
+            .getOrAwaitValue()
+
+        assertEquals(
+            expected = UiOptionsDTO.RefreshStyle.FAB,
+            actual = (response as WeatherState.Error).refreshStyle,
         )
     }
 
