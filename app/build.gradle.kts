@@ -15,6 +15,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+        testApplicationId = "com.hirno.weather.test"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -50,14 +51,6 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
 
-    // Chart
-    implementation(libs.mp.android.chart)
-
-    // Icons
-    implementation(libs.iconics)
-    implementation(libs.iconics.community.material)
-    implementation(libs.iconics.weather)
-
     // Retrofit
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
@@ -66,6 +59,14 @@ dependencies {
 
     // Dependency Injection
     implementation(libs.koin.android)
+
+    // Icons
+    implementation(libs.iconics)
+    implementation(libs.iconics.community.material)
+    implementation(libs.iconics.weather)
+
+    // Chart
+    implementation(libs.mp.android.chart)
 
     // Unit Test
     testImplementation(libs.junit4)
@@ -86,6 +87,7 @@ dependencies {
     androidTestImplementation(libs.androidx.test.rules)
     androidTestImplementation(libs.androidx.test.core.ktx)
     androidTestImplementation(libs.androidx.test.junit.ktx)
+    androidTestImplementation(libs.androidx.test.uiautomator)
     androidTestImplementation(libs.koin.android)
     androidTestImplementation(libs.koin.test)
     androidTestImplementation(libs.koin.test.junit4)
