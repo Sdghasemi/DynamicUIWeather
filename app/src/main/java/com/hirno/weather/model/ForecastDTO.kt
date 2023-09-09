@@ -5,7 +5,6 @@ import android.os.Parcelable
 import androidx.annotation.ColorRes
 import com.hirno.weather.R
 import kotlinx.parcelize.Parcelize
-import kotlin.random.Random
 import com.google.gson.annotations.SerializedName as Key
 
 /**
@@ -55,11 +54,7 @@ data class HourlyDTO(
     val windSpeeds: List<Double> = listOf(),
     @Key("uv_index")
     val uvIndices: List<Double> = listOf(),
-    @Key("is_day")
-    private val _isDay: List<Int> = listOf(),
-) : Parcelable {
-    val isDay = Random.nextBoolean()
-}
+) : Parcelable
 
 @Parcelize
 data class DailyUnitsDTO(
@@ -107,7 +102,7 @@ data class UiOptionsDTO(
         @Key("color")
         val color: GradientClass = GradientClass.CLASS_1,
         @Key("direction")
-        val direction: GradientOrientation = GradientOrientation.TR_BL,
+        val direction: GradientOrientation = GradientOrientation.TOP_RIGHT_TO_BOTTOM_LEFT,
     ) : Parcelable {
         @Parcelize
         enum class GradientClass(
@@ -170,22 +165,22 @@ data class UiOptionsDTO(
             val orientation: GradientDrawable.Orientation,
         ) : Parcelable {
             @Key("TR_BL")
-            TR_BL(
+            TOP_RIGHT_TO_BOTTOM_LEFT(
                 orientation = GradientDrawable.Orientation.TR_BL
             ),
 
             @Key("BR_TL")
-            BR_TL(
+            BOTTOM_RIGHT_TO_TOP_LEFT(
                 orientation = GradientDrawable.Orientation.BR_TL
             ),
 
             @Key("BL_TR")
-            BL_TR(
+            BOTTOM_LEFT_TO_TOP_RIGHT(
                 orientation = GradientDrawable.Orientation.BL_TR
             ),
 
             @Key("TL_BR")
-            TL_BR(
+            TOP_LEFT_TO_BOTTOM_RIGHT(
                 orientation = GradientDrawable.Orientation.TL_BR
             ),
         }
@@ -213,39 +208,5 @@ data class UiOptionsDTO(
 
         @Key("FAB")
         FAB,
-    }
-}
-
-/**
- * Model of each collection item
- */
-@Parcelize
-data class CollectionItemModel @JvmOverloads constructor(
-    @Key("id")
-    var id: String = "",
-    @Key("objectNumber")
-    var objectNumber: String = "",
-    @Key("title")
-    var title: String? = null,
-    @Key("webImage")
-    var webImage: WebImage = WebImage(),
-) : Parcelable {
-    /**
-     * Model of webImage property inside [CollectionItemModel]
-     */
-    @Parcelize
-    data class WebImage(
-        @Key("width")
-        var width: Int = 0,
-        @Key("height")
-        var height: Int = 0,
-        @Key("url")
-        var url: String? = null,
-    ) : Parcelable {
-        /**
-         * Returns a string ratio of the collection image
-         */
-        val ratioString
-            get() = "$width:$height"
     }
 }

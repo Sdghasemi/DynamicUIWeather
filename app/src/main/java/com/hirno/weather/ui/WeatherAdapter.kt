@@ -154,22 +154,22 @@ class WeatherAdapter : ListAdapter<WeatherListBlock, ViewHolder>(WeatherBlocksDi
             super.onBind(model)
             icon.drawableTintRes = model.primaryTextColorRes
             number.textColorRes = model.primaryTextColorRes
-            label.textColorRes = model.secondaryTextColorRes
+            unit.textColorRes = model.secondaryTextColorRes
             when (model) {
                 is WindSpeed -> {
                     icon.imageDrawable = root.iconicsDrawable(CommunityMaterial.Icon3.cmd_weather_windy)
                     number.text = model.speed.toInt().toString()
-                    label.text = model.unit
+                    unit.text = model.unit
                 }
                 is PrecipitationSum -> {
                     icon.imageDrawable = root.iconicsDrawable(WeatherIcons.Icon.wic_umbrella)
                     number.text = model.sum.toString()
-                    label.text = model.unit
+                    unit.text = model.unit
                 }
                 is HumidityPercentage -> {
                     icon.imageDrawable = root.iconicsDrawable(WeatherIcons.Icon.wic_humidity)
                     number.text = model.percentage.toString()
-                    label.text = "%"
+                    unit.text = "%"
                 }
                 else -> {}
             }
